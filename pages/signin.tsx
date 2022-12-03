@@ -17,7 +17,7 @@ const SignIn = () => {
 
   return (
     <div>
-      <main className="container mx-auto py-8">
+      <main className="container mx-auto max-w-2xl py-8">
         {!session ? (
           <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} redirectTo="/" />
         ) : null}

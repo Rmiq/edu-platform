@@ -29,7 +29,13 @@ const World: NextPage = () => {
         <h1 className="text-xl mb-4">Tasks</h1>
         <ul>
           <li>
-            <Link href="/worlds/1/1" className='block p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100'>Task 1</Link>
+            <Link href="/worlds/1/1" className='block p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 my-4'>Task 1</Link>
+          </li>
+          <li>
+            <button disabled className='block text-start w-full p-6 bg-gray-200 border border-gray-200 rounded-lg shadow-md my-4'>Task 2</button>
+          </li>
+          <li>
+            <button disabled className='block text-start w-full p-6 bg-gray-200 border border-gray-200 rounded-lg shadow-md my-4'>Task 3</button>
           </li>
         </ul>
       </main>

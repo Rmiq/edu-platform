@@ -1,12 +1,22 @@
 import { useSession, useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Header = () => {
+  const user = useUser();
   const session = useSession();
   const supabase = useSupabaseClient();
-  const user = useUser();
+  const [points, setPoints] = useState(0);
 
+  const getProfileData = async () => {
+    const { id } = user;
+    let { data: users, error } = await supabase.from('users').select('points').eq('id', id);
+    setPoints(users[0].points);
+  };
+
+  useEffect(() => {
+    getProfileData();
+  }, [user, session]);
   return (
     <header className="border p-4">
       <div className="container mx-auto flex flex-row justify-between">
@@ -14,7 +24,7 @@ const Header = () => {
           🏠
         </Link>
         <div>
-          <span className="mx-2 text-lg">💰: 0</span>
+          <span className="mx-2 text-lg">💰: {points}</span>
           <span className="mx-2 text-lg">👩 {user?.email}</span>
         </div>
       </div>
