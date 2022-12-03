@@ -9,9 +9,9 @@ const Header = () => {
   const [points, setPoints] = useState(0);
 
   const getProfileData = async () => {
-    const { id } = user;
+    const id = user?.id;
     let { data: users, error } = await supabase.from('users').select('points').eq('id', id);
-    setPoints(users[0].points);
+    setPoints(users ? users[0].points : 0);
   };
 
   useEffect(() => {

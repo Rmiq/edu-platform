@@ -9,14 +9,14 @@ export const getServerSideProps = (ctx: GetServerSidePropsContext) => {
   return { props: { task: task } };
 };
 
-const World: NextPage = ({ task }) => {
+const World = ({ task } : {task: string}) => {
   const [isClicked, setIsClicked] = useState(false);
   const router = useRouter();
   const user = useUser();
   const supabase = useSupabaseClient();
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState<string | undefined>(undefined);
   useEffect(() => {
-    const { id } = user;
+    const id = user?.id;
     setUserId(id);
   }, [user])
  
@@ -24,8 +24,8 @@ const World: NextPage = ({ task }) => {
   const handleClick = async () => {
     setIsClicked(true);
     
-    let { data: users, err } = await supabase.from('users').select('points').eq('id', userId);
-    const incrementedPoints = users[0].points += 10;
+    let { data: users } = await supabase.from('users').select('points').eq('id', userId);
+    const incrementedPoints = users ? users[0].points += 10 : 0;
     const { data, error } = await supabase
       .from('users')
       .update({ points: incrementedPoints })
