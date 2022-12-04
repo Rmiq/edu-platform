@@ -1,17 +1,27 @@
-import { withPageAuth } from '@supabase/auth-helpers-nextjs';
-import type { NextPage } from 'next';
+import { createServerSupabaseClient, withPageAuth } from '@supabase/auth-helpers-nextjs';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Header from '../../components/Header';
 
-export const getServerSideProps = withPageAuth({
-  redirectTo: "/signin",
-  // async getServerSideProps(context) {
-  //   const world = context.query.id;
-  //   return { props: { world: world } };
-  // }
-});
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const supabase = createServerSupabaseClient(ctx);
+
+  const {
+    data: { session }
+  } = await supabase.auth.getSession();
+
+  // if (!session)
+  //   return {
+  //     redirect: {
+  //       destination: '/signin',
+  //       permanent: false
+  //     }
+  //   };
+
+  return { props: {}}
+};
 
 const World: NextPage = () => {
   
@@ -32,10 +42,10 @@ const World: NextPage = () => {
             <Link href="/worlds/1/1" className='block p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 my-4'>Task 1</Link>
           </li>
           <li>
-            <button disabled className='block text-start w-full p-6 bg-gray-200 border border-gray-200 rounded-lg shadow-md my-4'>Task 2</button>
+            <button disabled className='block text-start w-full p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md my-4'>🔒 Task 2</button>
           </li>
           <li>
-            <button disabled className='block text-start w-full p-6 bg-gray-200 border border-gray-200 rounded-lg shadow-md my-4'>Task 3</button>
+            <button disabled className='block text-start w-full p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md my-4'>🔒 Task 3</button>
           </li>
         </ul>
       </main>

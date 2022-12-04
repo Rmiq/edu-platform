@@ -17,15 +17,16 @@ const Header = () => {
   useEffect(() => {
     getProfileData();
   }, [user, session]);
+
   return (
-    <header className="border p-4">
-      <div className="container mx-auto flex flex-row justify-between">
+    <header className="border">
+      <div className="container mx-auto p-4 flex flex-row justify-between">
         <Link className="text-lg" href="/">
           🏠
         </Link>
         <div>
           <span className="mx-2 text-lg">💰: {points}</span>
-          <span className="mx-2 text-lg">👩 {user?.email}</span>
+          <Link className="mx-2 text-lg" href="/account">👩 {user?.email}</Link>
         </div>
       </div>
     </header>

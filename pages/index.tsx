@@ -4,6 +4,7 @@ import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../components/Header';
+import Image from 'next/image';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -12,13 +13,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     data: { session }
   } = await supabase.auth.getSession();
 
-  if (!session)
-    return {
-      redirect: {
-        destination: '/signin',
-        permanent: false
-      }
-    };
+  // if (!session)
+  //   return {
+  //     redirect: {
+  //       destination: '/signin',
+  //       permanent: false
+  //     }
+  //   };
 
   return { props: {}}
 };
@@ -33,13 +34,14 @@ const Home: NextPage = () => {
       </Head>
 
       <Header />
-      <main className="container mx-auto py-4">
+      <main className="container mx-auto p-4">
         <header></header>
         <h1 className="text-xl mb-4">Worlds</h1>
         <section>
           <Link href={'/worlds/1'}>
-            <article className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100">
-              <h2>World 1</h2>
+            <article className="block max-w-sm bg-white rounded-lg shadow-md hover:bg-gray-100">
+              <Image src="/pic1.png" alt="" width="400" height="150" className='border-none'/>
+              <h2 className='p-6'>World 1</h2>
             </article>
           </Link>
         </section>
