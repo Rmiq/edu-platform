@@ -12,7 +12,10 @@ const Header = () => {
   const getProfileData = async () => {
     const id = user?.id;
     console.log(user);
-    let { data: users, error } = await supabase.from('users').select('points').eq('id', id);
+    let { data: users, error } = await supabase
+      .from('users')
+      .select('points')
+      .eq('id', id);
     setPoints(users ? users[0].points : 0);
   };
 
@@ -28,7 +31,16 @@ const Header = () => {
         </Link>
         <div className="flex">
           <span className="mx-2 text-lg">💰: {points}</span>
-          <Link className="mx-2 text-lg flex" href="/account"><Image className="mx-2 rounded-full" width={30} height={30} src={user?.user_metadata.avatar_url}/> {user?.email}</Link>
+          <Link className="mx-2 text-lg flex" href="/account">
+            <Image
+              className="mx-2 rounded-full"
+              alt="Discord avatar"
+              width={30}
+              height={30}
+              src={user?.user_metadata.avatar_url}
+            />{' '}
+            {user?.email}
+          </Link>
         </div>
       </div>
     </header>
