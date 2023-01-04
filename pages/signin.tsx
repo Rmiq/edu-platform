@@ -20,7 +20,7 @@ const SignIn = () => {
       <main className="container mx-auto max-w-2xl py-8">
         <h1 className="text-2xl text-center py-4">Please login to the application</h1>
         {!session ? (
-          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} redirectTo="/" />
+          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} redirectTo="/" providers={["discord"]}/>
         ) : null}
       </main>
     </div>

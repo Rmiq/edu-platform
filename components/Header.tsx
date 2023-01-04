@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
         <div>
           <span className="mx-2 text-lg">💰: {points}</span>
-          <Link className="mx-2 text-lg" href="/account">👩 {user?.email}</Link>
+          <Link className="mx-2 text-lg" href="/account">{user?.avatar_url} {user?.email}</Link>
         </div>
       </div>
     </header>
