@@ -9,7 +9,7 @@ const Header = () => {
   const [points, setPoints] = useState(0);
 
   const getProfileData = async () => {
-    const id = user?.id;
+    const id = user.id;
     let { data: users, error } = await supabase.from('users').select('points').eq('id', id);
     setPoints(users ? users[0].points : 0);
   };
@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
         <div>
           <span className="mx-2 text-lg">💰: {points}</span>
-          <Link className="mx-2 text-lg" href="/account">{user?.avatar_url} {user?.email}</Link>
+          <Link className="mx-2 text-lg" href="/account">{user.avatar_url} {user.email}</Link>
         </div>
       </div>
     </header>
